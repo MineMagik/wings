@@ -112,7 +112,7 @@ func (l Limits) AsContainerResources() container.Resources {
 		MemoryReservation: l.MemoryLimit * 1_000_000,
 		MemorySwap:        l.ConvertedSwap(),
 		BlkioWeight:       l.IoWeight,
-		OomScoreAdj:       &l.OOMDisabled,
+		OomScoreAdj:       oom_score_adj,
 		PidsLimit:         &pids,
 	}
 
