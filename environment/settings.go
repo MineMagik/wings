@@ -103,16 +103,12 @@ func (l Limits) ProcessLimit() int64 {
 // that Docker understands.
 func (l Limits) AsContainerResources() container.Resources {
 	pids := l.ProcessLimit()
-	oom_score_adj := 0
-	if (&l.OOMDisabled) {
-		oom_score_adj = -1000
-	}
 	resources := container.Resources{
 		Memory:            l.BoundedMemoryLimit(),
 		MemoryReservation: l.MemoryLimit * 1_000_000,
 		MemorySwap:        l.ConvertedSwap(),
 		BlkioWeight:       l.IoWeight,
-		OomScoreAdj:       oom_score_adj,
+		// OomScoreAdj:       oom_score_adj,
 		PidsLimit:         &pids,
 	}
 
